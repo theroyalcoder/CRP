@@ -14,7 +14,7 @@ crp_c_id = "null"
 crp_c_name = "null"
 crp_c_symbol = "null"
 crp_c_slug = "null"
-crp_c_rank = "null"
+crp_c_rank = 0
 crp_c_isactive = "null"
 crp_c_first_historical_data = "null"
 crp_c_last_historical_data = "null"
@@ -23,7 +23,7 @@ crp_p_id = 9
 crp_p_tokenaddress = "null"
 
 flag_useapi = False
-flag_debugmode = False
+flag_debugmode = True
 
 mydb = mysql.connector.connect(
     host="192.168.64.2",
@@ -69,7 +69,7 @@ if flag_useapi:
 
 # Import the generated JSON data
 # Opening JSON file
-f = open('export/data.json')
+f = open('export/bulk_import_all_cryptos.json')
 
 # returns JSON object as a dictionary
 data = json.load(f)
