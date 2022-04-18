@@ -1,4 +1,4 @@
-# THIS PROGRAM IS FOR THE INITIAL FILLING OF THE DATABASE
+# THIS PROGRAM IS FOR THE INITIAL FILLING OF THE DATABASE CRP, TABLE CryptoMasterData
 
 #IMPORTS
 from xml.dom.minidom import Element
@@ -58,11 +58,11 @@ if flag_useapi:
     print(e)
 
   # Export to JSON file
-  a_file = open("export/data.json", "w")
+  a_file = open("export/bulk_import_all_cryptos.json", "w")
   json.dump(data, a_file)
   a_file.close()
 
-  a_file = open("export/data.json", "r")
+  a_file = open("export/bulk_import_all_cryptos.json", "r")
   output = a_file.read()
   print(output)
   a_file.close()
