@@ -53,7 +53,8 @@ if flag_useapi:
     try:
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
-        print(data)
+        if flag_debugmode:
+            print(data)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
 
@@ -64,7 +65,8 @@ if flag_useapi:
 
     a_file = open("export/bulk_import_all_cryptos.json", "r")
     output = a_file.read()
-    print(output)
+    if flag_debugmode:
+        print(output)
     a_file.close()
 
 # Import the generated JSON data
@@ -95,7 +97,8 @@ for crypto in extdata:
     crp_c_isactive = crypto.get("is_active")
     crp_c_first_historical_data = crypto.get("first_historical_data")
     crp_c_last_historical_data = crypto.get("last_historical_data")
-    print(crp_c_id, "\n", crp_c_name, "\n", crp_c_symbol, "\n", crp_c_slug, "\n",
+    if flag_debugmode:
+        print(crp_c_id, "\n", crp_c_name, "\n", crp_c_symbol, "\n", crp_c_slug, "\n",
           crp_c_isactive, "\n", crp_c_first_historical_data, "\n",
           crp_c_last_historical_data, "\n", crp_p_id, "\n", crp_p_tokenaddress)
 
@@ -105,7 +108,8 @@ for crypto in extdata:
         extplatform = crypto.get("platform")
         crp_p_id = extplatform.get("id")
         crp_p_tokenaddress = extplatform.get("token_address")
-        print(crp_p_id, "\n", crp_p_tokenaddress, "\n")
+        if flag_debugmode:
+            print(crp_p_id, "\n", crp_p_tokenaddress, "\n")
 
     mycursor = mydb.cursor()
     sql = "INSERT INTO CryptoMasterData (cmc_id, name, symbol, slug, rank, is_active, first_historical_data, last_historical_data, has_platform, platform_id, platform_token_address) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -113,5 +117,6 @@ for crypto in extdata:
            crp_c_last_historical_data, crp_p_hasplatform, crp_p_id, crp_p_tokenaddress)
     mycursor.execute(sql, val)
     mydb.commit()
-    print(mycursor.rowcount, "record inserted.")
+    if flag_debugmode:
+        print(mycursor.rowcount, "record inserted.")
     crp_p_hasplatform = False
