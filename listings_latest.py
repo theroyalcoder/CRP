@@ -67,11 +67,11 @@ if flag_useapi:
     print(e)
 
   # Export to JSON file
-  a_file = open("export/data.json", "w")
+  a_file = open("export/listings_latest.json", "w")
   json.dump(data, a_file)
   a_file.close()
 
-  a_file = open("export/data.json", "r")
+  a_file = open("export/listings_latest.json", "r")
   output = a_file.read()
   if flag_debugmode:
     print(output)
@@ -136,5 +136,6 @@ for crypto in extdata:
   crp_c_percent_change_7d, crp_c_percent_change_30d, crp_c_percent_change_60d, crp_c_percent_change_90d, crp_c_market_cap, crp_c_market_cap_dominance, crp_c_fully_diluted_market_cap)
   mycursor.execute(sql, val)
   mydb.commit()
-  print(mycursor.rowcount, "record inserted.")
+  if flag_debugmode:
+    print(mycursor.rowcount, "record inserted.")
   crp_c_last_updated = False
