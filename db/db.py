@@ -3,7 +3,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="192.168.64.2",
   user="crp_agent",
-  password="crp_agent",
+  password="",
   database="CRP"
 )
 
